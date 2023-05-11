@@ -1,4 +1,4 @@
-1224
+2
 Javascript Tetris
 =================
 
