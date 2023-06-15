@@ -9,7 +9,7 @@ on:
       - main
 jobs:
   report-to-port:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: "Get workflow conclusion"
         id: get-conclusion
