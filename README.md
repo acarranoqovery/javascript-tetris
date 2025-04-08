@@ -1,4 +1,4 @@
-Javascript Tetris 2
+Javascript Tetris
 =================
 
 An HTML5 Tetris Game
