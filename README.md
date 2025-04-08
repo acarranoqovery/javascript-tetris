@@ -1,4 +1,3 @@
-TESTw2 252
 Javascript Tetris
 =================
 
