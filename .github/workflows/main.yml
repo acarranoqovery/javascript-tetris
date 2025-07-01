@@ -6,6 +6,9 @@ name: Publish Docker image and Deploy with Qovery
 on:
   release:
     types: [published]
+  pull_request:
+    types: [opened, reopened]
+    branches: [main, master]  # Specify target branches
 
 jobs:
   deploy_with_qovery:
