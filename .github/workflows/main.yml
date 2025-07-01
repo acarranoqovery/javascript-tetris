@@ -1,0 +1,30 @@
+# 1. Build and Push image to a remote registry
+# 2. Deploy with Qovery
+
+name: Publish Docker image and Deploy with Qovery
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy_with_qovery:
+    name: Push Docker image to Docker Hub and Deploy with Qovery
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy with Qovery
+        uses: actions/checkout@v3
+        env:
+          QOVERY_CLI_ACCESS_TOKEN: ${{ secrets.QOVERY_CLI_ACCESS_TOKEN }}
+        shell: bash
+        run: |
+          # Download and install Qovery CLI
+          curl -s https://get.qovery.com | bash
+
+          qovery container deploy \
+            --organization <your_org_name> \
+            --project <your_project_name> \
+            --environment <your_environment_name> \
+            --container <your_qovery_container_name> \
+            --tag ${{ github.sha }} \
+            --watch
