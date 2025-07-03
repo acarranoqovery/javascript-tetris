@@ -1,0 +1,78 @@
+{
+  "apiVersion": "v1.2",
+  "spec": {
+    "kind": "Workflow",
+    "spec": {
+      "type": "sequential",
+      "steps": [
+        {
+          "kind": "Project",
+          "ref": "project",
+          "spec": {
+            "name": "test-northflank",
+            "color": "#57637A",
+            "networking": {
+              "tailscale": {
+                "authKeyTags": [],
+                "enabled": false
+              }
+            },
+            "region": "europe-west"
+          }
+        },
+        {
+          "kind": "Workflow",
+          "spec": {
+            "type": "sequential",
+            "context": {
+              "projectId": "${refs.project.id}"
+            },
+            "steps": []
+          }
+        },
+        {
+          "kind": "OpenTofu",
+          "spec": {
+            "stateKey": "c48f3f60-87f4-4062-977d-8a1d25f9d420",
+            "spec": {
+              "resource": {
+                "aws_s3_bucket": {
+                  "bucket": {
+                    "bucket": "nf-ale-example-bucket-name"
+                  }
+                }
+              },
+              "output": {
+                "${aws_s3_bucket.my_bucket.bucket_domain_name}": {
+                  "value": "bucket_id"
+                }
+              },
+              "provider": {
+                "aws": {
+                  "integrationId": "test",
+                  "region": "eu-west-3"
+                }
+              }
+            }
+          },
+          "condition": "success",
+          "ref": "deploy"
+        }
+      ]
+    }
+  },
+  "name": "S3bucket",
+  "description": "",
+  "options": {
+    "autorun": false,
+    "concurrencyPolicy": "allow"
+  },
+  "gitops": {
+    "repoUrl": "https://github.com/acarranoqovery/javascript-tetris",
+    "vcsService": "github",
+    "accountLogin": "acarranoqovery",
+    "branch": "master",
+    "filePath": "/northflank.json"
+  },
+  "$schema": "https://api.northflank.com/v1/schemas/template"
+}
