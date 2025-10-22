@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>c1 Javascript Tetris</title>
+  <title>Javascript Tetris</title>
   <style>
     body      { font-family: Helvetica, sans-serif; }
     #tetris   { margin: 1em auto; padding: 1em; border: 4px solid black; border-radius: 10px; background-color: #F8F8F8; }
@@ -40,6 +40,7 @@
 
   <script src="stats.js"></script>
   <script>
+    'use strict';
 
     //-------------------------------------------------------------------------
     // base helper methods
@@ -141,7 +142,7 @@
     // check if a piece can fit into a position in the grid
     //-----------------------------------------------------
     function occupied(type, x, y, dir) {
-      var result = false
+      var result = false;
       eachblock(type, x, y, dir, function(x, y) {
         if ((x < 0) || (x >= nx) || (y < 0) || (y >= ny) || getBlock(x,y))
           result = true;
@@ -159,10 +160,10 @@
     //-----------------------------------------
     var pieces = [];
     function randomPiece() {
-      if (pieces.length == 0)
+      if (pieces.length === 0)
         pieces = [i,i,i,i,j,j,j,j,l,l,l,l,o,o,o,o,s,s,s,s,t,t,t,t,z,z,z,z];
-      var type = pieces.splice(random(0, pieces.length-1), 1)[0];
-      return { type: type, dir: DIR.UP, x: Math.round(random(0, nx - type.size)), y: 0 };
+      var type = pieces.splice(Math.floor(random(0, pieces.length-1)), 1)[0];
+      return { type: type, dir: DIR.UP, x: Math.floor(random(0, nx - type.size)), y: 0 };
     }
 
 
@@ -223,7 +224,7 @@
           case KEY.ESC:    lose();                  handled = true; break;
         }
       }
-      else if (ev.keyCode == KEY.SPACE) {
+      else if (ev.keyCode === KEY.SPACE) {
         play();
         handled = true;
       }
@@ -303,7 +304,7 @@
     }
 
     function rotate() {
-      var newdir = (current.dir == DIR.MAX ? DIR.MIN : current.dir + 1);
+      var newdir = (current.dir === DIR.MAX ? DIR.MIN : current.dir + 1);
       if (unoccupied(current.type, current.x, current.y, newdir)) {
         current.dir = newdir;
         invalidate();
@@ -434,7 +435,7 @@
     function drawBlock(ctx, x, y, color) {
       ctx.fillStyle = color;
       ctx.fillRect(x*dx, y*dy, dx, dy);
-      ctx.strokeRect(x*dx, y*dy, dx, dy)
+      ctx.strokeRect(x*dx, y*dy, dx, dy);
     }
 
     //-------------------------------------------------------------------------

@@ -1,4 +1,3 @@
-23222234545 TESTw2
 Javascript Tetris
 =================
 
