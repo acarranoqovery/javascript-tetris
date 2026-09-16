@@ -1,0 +1,9 @@
+# Allowlist approach: ignore everything, then re-include only what the image
+# actually needs. This keeps the build context to a few KB and prevents
+# unrelated changes (README edits, CI config, .git history) from being sent to
+# the builder or affecting layer caching.
+*
+
+# Files copied by the Dockerfile:
+!www
+!nginx.conf
