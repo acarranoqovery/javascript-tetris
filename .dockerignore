@@ -1,0 +1,12 @@
+# Only `www/` and `nginx.conf` are needed to build the image (see Dockerfile).
+# Everything else is excluded so it is not sent to the Docker build context.
+# This drops ~200K of `.git` history (~66% of the context) plus docs/CI config,
+# making context upload faster and avoiding spurious layer-cache invalidation.
+.git
+.github
+.dockerignore
+Dockerfile
+docker-compose.yml
+northflank.json
+README.md
+LICENSE
