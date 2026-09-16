@@ -1,0 +1,13 @@
+# Keep the Docker build context tiny: only what the image actually needs
+# (www/ + nginx.conf, pulled in by explicit COPYs in the Dockerfile) should
+# reach the builder. Everything below is repo metadata, docs, or config for
+# other platforms and only bloats the context upload / risks cache busts.
+.git
+.github
+.gitignore
+*.md
+LICENSE
+docker-compose.yml
+northflank.json
+.dockerignore
+Dockerfile
