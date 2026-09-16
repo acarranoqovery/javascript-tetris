@@ -1,0 +1,8 @@
+# Allowlist approach: ignore everything, then re-include only what the
+# Dockerfile actually COPYs. This keeps the build context minimal and prevents
+# future files (node_modules, secrets, large assets) from silently bloating the
+# context or invalidating the build cache.
+*
+
+!www
+!nginx.conf
