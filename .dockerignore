@@ -1,0 +1,8 @@
+# Send only the files the image actually needs to the build daemon.
+# Everything is excluded by default, then the two image inputs are re-included.
+# This keeps .git, .github/, docs and other-platform manifests out of the build
+# context (~296K -> ~76K today) and prevents future files from silently bloating it
+# or busting the build cache.
+*
+!nginx.conf
+!www
