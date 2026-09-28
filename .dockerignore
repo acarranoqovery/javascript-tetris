@@ -1,0 +1,10 @@
+# Trim the Docker build context — none of these are needed to build the image.
+# The largest by far is .git; the rest are docs, CI, and other-platform config.
+.git
+.github
+.gitignore
+.dockerignore
+README.md
+LICENSE
+docker-compose.yml
+northflank.json
